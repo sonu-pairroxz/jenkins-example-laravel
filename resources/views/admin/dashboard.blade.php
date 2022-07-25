@@ -42,16 +42,16 @@
                             <thead class="table-light">
                             <tr>
                                 <th>S No</th>
-                                <th>ruling_reference</th>
-                                <th>issuing_country</th>
-                                <th>start_date_of_validity</th>
-                                <th>end_date_of_validity</th>
-                                <th>nomenclature_code</th>
-                                <th>short_nomenclature_code</th>
-                                <th>classification_justification</th>
-                                <th>language</th>
-                                <th>image_url</th>
-                                <th>comments</th>
+                                <th>Ruling Reference</th>
+                                <th>Issuing Country</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Nomenclature Code</th>
+                                <th>Short Nomenclature Code</th>
+                                <th>Classification Justification</th>
+                                <th>Language</th>
+                                <th>Image URL</th>
+                                <th>Comments</th>
                             </tr>
                             </thead>
                             <tbody>
