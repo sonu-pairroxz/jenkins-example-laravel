@@ -1,0 +1,14 @@
+@font-face {
+  font-family: 'Sauvage Regular';
+  src: url('Sauvage Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'SauvageRegular';
+  src: url('SauvageRegular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
