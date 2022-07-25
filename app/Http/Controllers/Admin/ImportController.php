@@ -31,10 +31,43 @@ class ImportController extends Controller
                 ->addColumn('classification_justification', function($htuses){
                     return Str::limit($htuses->classification_justification,30);
                 })
-                ->rawColumns(['image'])
+                ->addColumn('action', function($htuses) {
+                    return '<button type="button" class="btn btn-success btn-sm" id="getEditProductData" data-id="'.$htuses->id.'">Edit</button>
+                        <button type="button" data-id="'.$htuses->id.'" class="btn btn-danger btn-sm" id="getDeleteId">Delete</button>';
+                })
+                ->rawColumns(['image','action'])
                 ->make(true);
         }
 
         return view('admin.dashboard');
     }
+
+    public function edit(Request $request){
+
+    }
+
+    public function get(Request $request, $id){
+        $data = Htus::find($id);
+        $html = "";
+        if($data){
+            $html = '<div class="form-group">';
+            $html .= '<input type="text" class="form-control" name="comment" value="'.$data->comments.'" />';
+            $html .= '</div>';
+        }
+
+        return response()->json(['html' => $html]);
+
+    }
+
+    public function delete(Request $request, $id){
+
+        $data = Htus::find($id);
+        dd($data);
+        if($data){
+            $data->delete();
+        }
+
+        return response()->json(['html' => ""]);
+    }
 }
+

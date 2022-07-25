@@ -51,9 +51,9 @@
                                 <th>Nomenclature Code</th>
                                 <th>Short Nomenclature Code</th>
                                 <th>Classification Justification</th>
-                                <th>Language</th>
                                 <th>Image URL</th>
                                 <th>Comments</th>
+                                <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -66,6 +66,49 @@
         </div>
     </div>
     <!-- end row -->
+    <div class="modal" id="EditProductModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Edit Comment</h4>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div id="EditProductModalBody">
+
+                    </div>
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" id="SubmitEditProductForm">Update</button>
+                    <button type="button" class="btn btn-danger modelClose" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Product Modal -->
+    <div class="modal" id="DeleteProductModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Product Delete</h4>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <h4>Are you sure want to delete this product?</h4>
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" id="SubmitDeleteProductForm">Yes</button>
+                    <button type="button" class="btn btn-default modelClose" data-dismiss="modal">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection
 @push('scripts')
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -120,19 +163,75 @@
                         name: 'classification_justification'
                     },
                     {
-                        data: 'language',
-                        name: 'language'
-                    },
-                    {
                         data: 'image_url',
                         name: 'image_url'
                     },
                     {
                         data: 'comments',
                         name: 'comments'
+                    },
+                    {
+                        data: 'action',
+                        name: 'action',
+                        orderable: false,
+                        searchable: false
                     }
                 ]
             });
         });
+    </script>
+
+<script>
+    $(document).ready(function() {
+        $('.modelClose').on('click', function(){
+            $('#EditProductModal').hide();
+            $('#DeleteProductModal').hide();
+        });
+
+        var id;
+        $('body').on('click', '#getEditProductData', function(e) {
+            e.preventDefault();
+            $('.alert-danger').html('');
+            $('.alert-danger').hide();
+            id = $(this).data('id');
+            $.ajax({
+                url: "getItem/"+id,
+                method: 'GET',
+                // data: {
+                //     id: id,
+                // },
+                success: function(result) {
+                    console.log(result);
+                    $('#EditProductModalBody').html(result.html);
+                    $('#EditProductModal').show();
+                }
+            });
+        });
+
+        var deleteID;
+        $('body').on('click', '#getDeleteId', function(){
+            deleteID = $(this).data('id');
+            $('#DeleteProductModal').show();
+        })
+        $('#SubmitDeleteProductForm').click(function(e) {
+            e.preventDefault();
+            var id = deleteID;
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "deleteItem/"+id,
+                method: 'DELETE',
+                success: function(result) {
+                    setInterval(function(){
+                        $('.datatable').DataTable().ajax.reload();
+                        $('#DeleteProductModal').hide();
+                    }, 1000);
+                }
+            });
+        });
+    });
     </script>
 @endpush

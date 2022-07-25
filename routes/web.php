@@ -34,12 +34,14 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::get('/','Auth\AdminAuthController@index')->name('adminLogin');
     Route::post('admin.login', 'Auth\AdminAuthController@login')->name('adminLoginPost');
     Route::get('admin.logout', 'Auth\AdminAuthController@logout')->name('adminLogout');
-    Route::post('file-import', [ImportController::class, 'fileImport'])->name('file-import');
-    Route::get('htuses', [ImportController::class, 'allHtus'])->name('all-htus');
-
 
 	Route::group(['middleware' => ['adminauth']], function(){
         Route::get('dashboard', 'DashboardController@index')->name('admin.dashboard');
+        Route::post('file-import', [ImportController::class, 'fileImport'])->name('file-import');
+        Route::get('htuses', [ImportController::class, 'allHtus'])->name('all-htus');
+        Route::get('editRoute', [ImportController::class, 'edit'])->name('editRoute');
+        Route::get('getItem/{id}', [ImportController::class, 'get'])->name('getItem');
+        Route::delete('deleteItem/{id}', [ImportController::class, 'get'])->name('deleteItem');
 	});
 });
 
