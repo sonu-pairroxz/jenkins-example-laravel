@@ -3,11 +3,13 @@
 namespace App\Imports;
 
 use App\Models\Htus;
+use Carbon\Carbon;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithBatchInserts;
 use Maatwebsite\Excel\Concerns\WithUpserts;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use PhpOffice\PhpSpreadsheet\Shared\Date;
 
 class HtusImport implements ToModel, WithUpserts, WithBatchInserts, WithChunkReading, WithHeadingRow
 {
@@ -21,8 +23,8 @@ class HtusImport implements ToModel, WithUpserts, WithBatchInserts, WithChunkRea
         return new Htus([
             'ruling_reference'              => $row['ruling_reference'],
             'issuing_country'               => $row['issuing_country'],
-            'start_date_of_validity'        => $row['start_date_of_validity'],
-            'end_date_of_validity'          => $row['end_date_of_validity'],
+            'start_date_of_validity'        => Date::excelToDateTimeObject($row['start_date_of_validity'])->format('Y-m-d'),
+            'end_date_of_validity'          => Date::excelToDateTimeObject($row['end_date_of_validity'])->format('Y-m-d'),
             'nomenclature_code'             => $row['nomenclature_code'],
             'short_nomenclature_code'       => $row['short_nomenclature_code'],
             'classification_justification'  => $row['classification_justification'],

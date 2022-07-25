@@ -15,7 +15,7 @@ class CreateHtusesTable extends Migration
     {
         Schema::create('htuses', function (Blueprint $table) {
             $table->id();
-            $table->string('ruling_reference')->nullable();
+            $table->string('ruling_reference')->unique();
             $table->string('issuing_country')->nullable();
             $table->string('start_date_of_validity')->nullable();
             $table->string('end_date_of_validity')->nullable();
