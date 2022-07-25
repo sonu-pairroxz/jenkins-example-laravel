@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Imports\HtusImport;
 use App\Models\Htus;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -26,6 +27,9 @@ class ImportController extends Controller
                 ->addIndexColumn()
                 ->addColumn('image', function($htuses){
                     return "<img src='".$htuses->image."' alt='".$htuses->image."' />";
+                })
+                ->addColumn('classification_justification', function($htuses){
+                    return Str::limit($htuses->classification_justification,30);
                 })
                 ->rawColumns(['image'])
                 ->make(true);

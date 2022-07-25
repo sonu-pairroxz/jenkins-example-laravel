@@ -8,10 +8,8 @@ use Maatwebsite\Excel\Concerns\WithBatchInserts;
 use Maatwebsite\Excel\Concerns\WithUpserts;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
-use Illuminate\Support\Str;
-use Ramsey\Uuid\Uuid;
 
-class HtusImport implements ToModel, WithUpserts, WithBatchInserts, WithChunkReading
+class HtusImport implements ToModel, WithUpserts, WithBatchInserts, WithChunkReading, WithHeadingRow
 {
     /**
     * @param array $row
@@ -21,31 +19,31 @@ class HtusImport implements ToModel, WithUpserts, WithBatchInserts, WithChunkRea
     public function model(array $row)
     {
         return new Htus([
-            'ruling_reference'              => $row[0],
-            'issuing_country'               => $row[1],
-            'start_date_of_validity'        => $row[2],
-            'end_date_of_validity'          => $row[3],
-            'nomenclature_code'             => $row[4],
-            'short_nomenclature_code'       => $row[5],
-            'classification_justification'  => $row[6],
-            'language'                      => $row[7],
-            'place_of_issue'                => $row[8],
-            'date_of_issue'                 => $row[9],
-            'name_address'                  => $row[10],
-            'description_0f_goods'          => $row[11],
-            'keywords'                      => $row[12],
-            'eccn'                          => $row[13],
-            'image_url'                     => $row[14],
-            'amazon_doc'                    => $row[15],
-            'chapter_note'                  => $row[16],
-            'comments'                      => $row[17],
-            'image'                         => $row[18]
+            'ruling_reference'              => $row['ruling_reference'],
+            'issuing_country'               => $row['issuing_country'],
+            'start_date_of_validity'        => $row['start_date_of_validity'],
+            'end_date_of_validity'          => $row['end_date_of_validity'],
+            'nomenclature_code'             => $row['nomenclature_code'],
+            'short_nomenclature_code'       => $row['short_nomenclature_code'],
+            'classification_justification'  => $row['classification_justification'],
+            'language'                      => $row['language'],
+            'place_of_issue'                => $row['place_of_issue'],
+            'date_of_issue'                 => $row['date_of_issue'],
+            'name_address'                  => $row['name_address'],
+            'description_0f_goods'          => $row['description_0f_goods'],
+            'keywords'                      => $row['keywords'],
+            'eccn'                          => $row['eccn'],
+            'image_url'                     => $row['image_url'],
+            'amazon_doc'                    => $row['amazon_doc'],
+            'chapter_note'                  => $row['chapter_note'],
+            'comments'                      => $row['comments'],
+            'image'                         => $row['image']
         ]);
     }
 
     public function uniqueBy()
     {
-        return 'code';
+        return 'ruling_reference';
     }
 
 
