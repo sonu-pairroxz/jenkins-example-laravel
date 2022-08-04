@@ -30,5 +30,11 @@ class AuthServiceProvider extends ServiceProvider
         Passport::tokensCan([
             'app' => 'Application Access'
         ]);
+
+        Gate::before(function ($user, $ability) {
+            if ($user->hasRole('super-admin')) {
+                return true;
+            }
+        });
     }
 }

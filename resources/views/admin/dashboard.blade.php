@@ -18,7 +18,7 @@
     <!-- end page title -->
 
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-sm-6">
             <div class="card">
                 <div class="card-body">
                     <form action="{{ route('file-import') }}" method="POST" enctype="multipart/form-data">
@@ -28,11 +28,12 @@
                                 <input type="file" name="file" class="custom-file-input" id="customFile">
                             </div>
                         </div>
-                        <button class="btn btn-primary">Import data</button>
+                        <button class="btn btn-sm btn-primary">Import data</button>
                     </form>
                 </div>
             </div>
         </div>
+        <div class="col-sm-6"></div>
     </div>
     <div class="row">
         <div class="col-lg-12">
@@ -40,7 +41,7 @@
                 <div class="card-body">
                     <h4 class="card-title mb-4">Latest Transaction</h4>
                     <div class="table-responsive">
-                        <table class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;" id="latestorder">
+                        <table class="table table-bordered dt-responsive nowrap datatable" style="border-collapse: collapse; border-spacing: 0; width: 100%;" id="latestorder">
                             <thead class="table-light">
                             <tr>
                                 <th>S No</th>
@@ -75,6 +76,7 @@
                 </div>
                 <!-- Modal body -->
                 <div class="modal-body">
+                    <div class="alert-danger"></div>
                     <div id="EditProductModalBody">
 
                     </div>
@@ -225,10 +227,41 @@
                 url: "deleteItem/"+id,
                 method: 'DELETE',
                 success: function(result) {
-                    setInterval(function(){
+                    $('.datatable').DataTable().ajax.reload();
+                    $('#DeleteProductModal').hide();
+                }
+            });
+        });
+
+        var itemID;
+        $('body').on('click', '#getEditProductData', function(){
+            itemID = $(this).data('id');
+        })
+
+        $('#SubmitEditProductForm').click(function(e) {
+            e.preventDefault();
+            var id = itemID;
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $('.alert-danger').html('');
+            $('.alert-danger').hide();
+            $.ajax({
+                url: "saveItem/"+id,
+                method: 'POST',
+                data: {
+                    comments: $('#comments').val(),
+                },
+                success: function(result) {
+
+                    if(result.status){
                         $('.datatable').DataTable().ajax.reload();
-                        $('#DeleteProductModal').hide();
-                    }, 1000);
+                        $('#EditProductModal').hide();
+                    }else{
+                        $(".alert-danger").html(result.message);
+                    }
                 }
             });
         });

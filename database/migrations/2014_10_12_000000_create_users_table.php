@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('mobile_no')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->enum('role',["admin","user"])->default("user");
+            $table->string('role')->default("user");
             $table->enum('is_newsletter',["0","1"])->default("0");
             $table->rememberToken();
             $table->timestamps();

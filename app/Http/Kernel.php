@@ -75,5 +75,10 @@ class Kernel extends HttpKernel
         'localization' => \App\Http\Middleware\Localization::class,
         'adminauth' => \App\Http\Middleware\AdminAuthenticated::class,
         'auth.verify' => \App\Http\Middleware\ApiVerify::class,
+
+        //roles permissions
+        'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
+        'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
+        'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,
     ];
 }

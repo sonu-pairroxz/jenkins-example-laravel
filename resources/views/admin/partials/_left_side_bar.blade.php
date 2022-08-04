@@ -30,7 +30,19 @@ $user = auth()->guard('admin')->user();
                 <li>
                     <a href="{{route('admin.dashboard')}}">
                         <i class="uil-home-alt"></i>
-                        <span>Dashboard</span>
+                        <span>Master Data</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#!">
+                        <i class="uil-home-alt"></i>
+                        <span>Ask Query</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#!">
+                        <i class="uil-home-alt"></i>
+                        <span>Quiz</span>
                     </a>
                 </li>
             </ul>

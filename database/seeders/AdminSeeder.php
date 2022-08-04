@@ -15,7 +15,7 @@ class AdminSeeder extends Seeder
      */
     public function run()
     {
-        Admin::firstOrCreate([
+        $user = Admin::firstOrCreate([
             'id'=>Str::uuid(),
             'first_name' => 'Admin',
             'last_name' => '',
@@ -23,7 +23,9 @@ class AdminSeeder extends Seeder
             'mobile_no' => '9999999999',
             'email_verified_at' => date('Y-m-d h:i:s'),
             'password' => bcrypt('password'),
-            'role' => 'admin'
+            'role' => 'super-admin'
         ]);
+
+        $user->assignRole('super-admin');
     }
 }

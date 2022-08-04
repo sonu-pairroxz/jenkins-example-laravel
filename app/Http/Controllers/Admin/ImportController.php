@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Imports\HtusImport;
 use App\Models\Htus;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
@@ -42,8 +44,20 @@ class ImportController extends Controller
         return view('admin.dashboard');
     }
 
-    public function edit(Request $request){
+    public function update(Request $request, $id){
+        try{
+            $data = Htus::find($id);
+            if(!$data){
+                return response()->json(["status"=> false, "message"=> "Item not found."]);
+            }
+            $data->comments = $request->comments ?? "n\a";
+            $data->save();
 
+            return response()->json(["status"=> true]);
+
+        }catch(Exception $e){
+            Log::error($e);
+        }
     }
 
     public function get(Request $request, $id){
@@ -51,7 +65,7 @@ class ImportController extends Controller
         $html = "";
         if($data){
             $html = '<div class="form-group">';
-            $html .= '<input type="text" class="form-control" name="comment" value="'.$data->comments.'" />';
+            $html .= '<input type="text" class="form-control" id="comments" name="comment" value="'.$data->comments.'" />';
             $html .= '</div>';
         }
 
@@ -62,7 +76,6 @@ class ImportController extends Controller
     public function delete(Request $request, $id){
 
         $data = Htus::find($id);
-        dd($data);
         if($data){
             $data->delete();
         }

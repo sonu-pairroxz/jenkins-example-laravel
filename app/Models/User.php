@@ -9,12 +9,14 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 
+use \Spatie\Permission\Traits\HasRoles;
+
 class User extends Authenticatable implements MustVerifyEmail
 {
     const ADMIN_TYPE = 'admin';
     const USER_TYPE = 'user';
 
-    use Uuid, HasFactory, Notifiable, HasApiTokens;
+    use Uuid, HasFactory, Notifiable, HasApiTokens, HasRoles;
     protected $guard = 'web';
 
     /**
