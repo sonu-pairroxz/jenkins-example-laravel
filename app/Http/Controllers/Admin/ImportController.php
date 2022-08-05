@@ -28,14 +28,15 @@ class ImportController extends Controller
             return DataTables::of($htuses)
                 ->addIndexColumn()
                 ->addColumn('image', function($htuses){
-                    return "<img src='".$htuses->image."' alt='".$htuses->image."' />";
+                    return "<img src='".$htuses->image_url."' height='50' width='50' alt='".$htuses->image."' />";
                 })
                 ->addColumn('classification_justification', function($htuses){
                     return Str::limit($htuses->classification_justification,30);
                 })
                 ->addColumn('action', function($htuses) {
                     return '<button type="button" class="btn btn-success btn-sm" id="getEditProductData" data-id="'.$htuses->id.'">Edit</button>
-                        <button type="button" data-id="'.$htuses->id.'" class="btn btn-danger btn-sm" id="getDeleteId">Delete</button>';
+                        <button type="button" data-id="'.$htuses->id.'" class="btn btn-danger btn-sm" id="getDeleteId">Delete</button>
+                        <a class="btn btn-warning btn-sm" href="'.route('getDetail', $htuses->id).'">View</a>';
                 })
                 ->rawColumns(['image','action'])
                 ->make(true);
@@ -70,6 +71,15 @@ class ImportController extends Controller
         }
 
         return response()->json(['html' => $html]);
+
+    }
+
+    public function getDetail(Request $request, $id){
+        $data = Htus::find($id);
+        if(!$data){
+            return back();
+        }
+        return view('admin.item', compact('data'));
 
     }
 

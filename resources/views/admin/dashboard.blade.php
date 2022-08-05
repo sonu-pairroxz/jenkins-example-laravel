@@ -45,6 +45,7 @@
                             <thead class="table-light">
                             <tr>
                                 <th>S No</th>
+                                <th>Image</th>
                                 <th>Ruling Reference</th>
                                 <th>Issuing Country</th>
                                 <th>Start Date</th>
@@ -52,7 +53,6 @@
                                 <th>Nomenclature Code</th>
                                 <th>Short Nomenclature Code</th>
                                 <th>Classification Justification</th>
-                                <th>Image URL</th>
                                 <th>Comments</th>
                                 <th>Action</th>
                             </tr>
@@ -137,6 +137,10 @@
                         searchable: false
                     },
                     {
+                        data: 'image',
+                        name: 'image'
+                    },
+                    {
                         data: 'ruling_reference',
                         name: 'ruling_reference'
                     },
@@ -163,10 +167,6 @@
                     {
                         data: 'classification_justification',
                         name: 'classification_justification'
-                    },
-                    {
-                        data: 'image_url',
-                        name: 'image_url'
                     },
                     {
                         data: 'comments',

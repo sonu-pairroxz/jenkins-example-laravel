@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use App\Models\Admin;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class AdminSeeder extends Seeder
 {
@@ -25,7 +27,5 @@ class AdminSeeder extends Seeder
             'password' => bcrypt('password'),
             'role' => 'super-admin'
         ]);
-
-        $user->assignRole('super-admin');
     }
 }

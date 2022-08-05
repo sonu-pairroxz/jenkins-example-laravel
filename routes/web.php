@@ -41,6 +41,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('htuses', [ImportController::class, 'allHtus'])->name('all-htus');
         Route::get('editRoute', [ImportController::class, 'edit'])->name('editRoute');
         Route::get('getItem/{id}', [ImportController::class, 'get'])->name('getItem');
+        Route::get('getDetail/{id}', [ImportController::class, 'getDetail'])->name('getDetail');
         Route::post('saveItem/{id}', [ImportController::class, 'update'])->name('saveItem');
         Route::delete('deleteItem/{id}', [ImportController::class, 'delete'])->name('deleteItem');
 	});

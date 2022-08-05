@@ -28,8 +28,8 @@ class RolesAndPermissionsSeeder extends Seeder
         Permission::create(['id'=>Str::uuid(), 'name' => 'add query']);
 
         //Roles create
-        Role::create(['id'=>Str::uuid(), 'name'=> 'admin'])->givePermissionTo(['add user','edit user','delete user','add query','edit comment']);
-        Role::create(['id'=>Str::uuid(), 'name'=> 'super-admin'])->givePermissionTo(Permission::all());
+        Role::create(['id'=>Str::uuid(), 'name'=> 'admin']);
+        Role::create(['id'=>Str::uuid(), 'name'=> 'super-admin']);
 
     }
 }

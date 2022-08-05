@@ -45,7 +45,7 @@ class AdminAuthController extends Controller
             'password' => 'required',
         ]);
         try {
-            if (auth()->guard('admin')->attempt(['email' => $request->input('email'), 'password' => $request->input('password'),'role'=>'admin']))
+            if (auth()->guard('admin')->attempt(['email' => $request->input('email'), 'password' => $request->input('password')]))
             {
                 $user = auth()->guard('admin')->user();
                 Session::flash('success','You are Login successfully!!');
