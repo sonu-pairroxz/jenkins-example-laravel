@@ -39,7 +39,7 @@ class HtusImport implements ToModel, WithUpserts, WithBatchInserts, WithChunkRea
             'amazon_doc'                    => $row['amazon_doc'],
             'chapter_note'                  => $row['chapter_note'],
             'comments'                      => $row['comments'],
-            'image'                         => $row['image']
+            'short_description'             => $row['short_description'],
         ]);
     }
 

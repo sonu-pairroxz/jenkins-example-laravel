@@ -23,15 +23,29 @@ class ImportController extends Controller
     public function allHtus(Request $request)
     {
         if ($request->ajax()) {
-            $htuses = Htus::latest()->get();
+            $htuses = Htus::latest();
 
             return DataTables::of($htuses)
                 ->addIndexColumn()
+                ->filter(function ($instance) use ($request) {
+                    if ($request->has('search')) {
+                        $instance->where('ruling_reference', 'like', "%{$request->get('search')}%")
+                        ->orWhere('nomenclature_code', 'like', "%{$request->get('search')}%")
+                        ->orWhere('classification_justification', 'like', "%{$request->get('search')}%")
+                        ->orWhere('place_of_issue', 'like', "%{$request->get('search')}%")
+                        ->orWhere('name_address', 'like', "%{$request->get('search')}%")
+                        ->orWhere('description_0f_goods', 'like', "%{$request->get('search')}%")
+                        ->orWhere('keywords', 'like', "%{$request->get('search')}%")
+                        ->orWhere('eccn', 'like', "%{$request->get('search')}%")
+                        ->orWhere('chapter_note', 'like', "%{$request->get('search')}%")
+                        ->orWhere('comments', 'like', "%{$request->get('search')}%");
+                    }
+                })
                 ->addColumn('image', function($htuses){
                     return "<img src='".$htuses->image_url."' height='50' width='50' alt='".$htuses->image."' />";
                 })
-                ->addColumn('classification_justification', function($htuses){
-                    return Str::limit($htuses->classification_justification,30);
+                ->addColumn('short_description', function($htuses){
+                    return Str::limit($htuses->short_description);
                 })
                 ->addColumn('action', function($htuses) {
                     return '<button type="button" class="btn btn-success btn-sm" id="getEditProductData" data-id="'.$htuses->id.'">Edit</button>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Admin\ImportController;
+use App\Http\Controllers\Admin\QueryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,6 +45,18 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('getDetail/{id}', [ImportController::class, 'getDetail'])->name('getDetail');
         Route::post('saveItem/{id}', [ImportController::class, 'update'])->name('saveItem');
         Route::delete('deleteItem/{id}', [ImportController::class, 'delete'])->name('deleteItem');
+
+
+        Route::prefix('query')->group(function(){
+            Route::get('', [QueryController::class, 'index'])->name('query.index');
+            Route::get('data', [QueryController::class, 'data'])->name('query.list.data');
+            Route::get('create', [QueryController::class, 'create'])->name('query.create');
+            Route::get('edit/{id}', [QueryController::class, 'edit'])->name('query.edit');
+            Route::post('update/{id}', [QueryController::class, 'update'])->name('query.update');
+            Route::post('store', [QueryController::class, 'store'])->name('query.store');
+            Route::get('show/{id}', [QueryController::class, 'create'])->name('query.show');
+            Route::delete('delete/{id}', [QueryController::class, 'create'])->name('query.delete');
+        });
 	});
 });
 

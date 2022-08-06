@@ -17,7 +17,19 @@ class CreateQueriesTable extends Migration
             $table->uuid('id')->primary();
             $table->foreignUuid('user_id')->nullable()->constrained('users');
             $table->string('title');
-            $table->string('subject');
+            $table->text('description');
+            $table->string('asin');
+            $table->string('work_stream');
+            $table->string('marketplace');
+            $table->string('tariff_node');
+            $table->string('manager_id');
+            $table->string('ruling_referred');
+            $table->string('external_links');
+            $table->string('document_referred');
+            $table->integer('no_of_nfa_parked')->default(0);
+            $table->string('itk');
+            $table->text('requester_comment')->nullable();
+            $table->text('resolver_comment')->nullable();
             $table->timestamps();
         });
     }
