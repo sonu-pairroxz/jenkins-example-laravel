@@ -5,6 +5,24 @@
 
 @section('content')
 
+<div class="row">
+    <div class="col-8">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Latest Notifications</h4>
+                <marquee behavior="scroll" direction="up" scrollamount=3 onmouseover="this.stop();" onmouseout="this.start();">
+                    @forelse ($notifications as $notification)
+                        <p class="card-title-desc">
+                            <a target="_blank" href="{{route('query.edit', $notification->query_id)}}"> >> {{$notification->notification_text}}</a>
+                        </p>
+                    @empty
+                    <p>No notification found.</p>
+                    @endforelse
+                </marquee>
+            </div>
+        </div>
+    </div> <!-- end col -->
+</div>
     <!-- start page title -->
     <div class="row">
         <div class="col-12">
@@ -36,6 +54,7 @@
                         <thead>
                         <tr>
                             <th>S.No</th>
+                            <th>Ticket ID</th>
                             <th>Title</th>
                             <th>Description</th>
                             <th>ASIN</th>

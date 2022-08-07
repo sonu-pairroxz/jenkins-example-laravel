@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\QueryRequest;
+use App\Models\Notification;
 use App\Models\Query;
 use Carbon\Carbon;
 use Exception;
@@ -16,7 +17,8 @@ use Illuminate\Support\Str;
 class QueryController extends Controller
 {
     public function index(Request $request){
-        return view('admin.query.index');
+        $notifications = Notification::latest()->get();
+        return view('admin.query.index', compact('notifications'));
     }
 
     public function create(Request $request){
@@ -27,8 +29,18 @@ class QueryController extends Controller
         try{
             $user = auth()->guard('admin')->user();
             $input = $request->all();
+            $input['ticket_id'] = Str::random(8);
             DB::beginTransaction();
-            $res = $user->userQuery()->create($input);
+            $query = $user->userQuery()->create($input);
+
+            //Save Notification
+            $notification = [
+                "user_id" => $user->id,
+                "title" => "Query added",
+                "description" => "New query submitted",
+                "notification_text" => sprintf("%s has submitted a new query with ID %s", $user->first_name, $query->ticket_id)
+            ];
+            $query->notification()->create($notification);
 
             DB::commit();
             return back()->with(["message"=>"Query submitted successfully"]);
@@ -73,7 +85,7 @@ class QueryController extends Controller
     public function update(Request $request, $id){
         try{
             $user = auth()->guard('admin')->user();
-            $input = $request->all();
+            $input = $request->only(['manager_id','marketplace','resolver_comment']);
             DB::beginTransaction();
             $query = $user->userQuery()->find($id);
             if(!$query){
@@ -81,6 +93,16 @@ class QueryController extends Controller
             }
 
             $query->update($input);
+
+
+             //Save Notification
+             $notification = [
+                "user_id" => $user->id,
+                "title" => "Comment added",
+                "description" => "New comment added on a query",
+                "notification_text" => sprintf("%s has added a new comment on a query with ID %s", $user->first_name, $query->ticket_id)
+            ];
+            $query->notification()->create($notification);
 
             DB::commit();
             return redirect(route('query.index'))->with(["message"=>"Query updated successfully"]);
@@ -98,12 +120,20 @@ class QueryController extends Controller
             //dd($user);
             return DataTables::of($query)
                 ->addIndexColumn()
+                ->addColumn('ticket_id', function($query){
+                    $route = route('query.edit', $query->id);
+                    return "<a href='".$route."'>".$query->ticket_id."</a>";
+                })
                 ->addColumn('actions','<a class="btn btn-outline-primary btn-sm" href="{{route(\'query.edit\',$id)}}" title="Edit"><i class="fas fa-pencil-alt"></i></a>')
-                ->rawColumns(['actions'])
+                ->rawColumns(['actions','ticket_id'])
                 ->make(true);
         }catch (Exception $e){
             Log::error($e);
         }
+    }
+
+    public function saveNotification(){
+
     }
 
 

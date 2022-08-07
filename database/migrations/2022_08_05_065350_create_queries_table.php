@@ -15,6 +15,7 @@ class CreateQueriesTable extends Migration
     {
         Schema::create('queries', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->string('ticket_id')->unique();
             $table->foreignUuid('user_id')->nullable()->constrained('users');
             $table->string('title');
             $table->text('description');

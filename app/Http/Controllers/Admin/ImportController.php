@@ -16,8 +16,17 @@ class ImportController extends Controller
 {
     public function fileImport(Request $request)
     {
-        Excel::import(new HtusImport, $request->file('file')->store('temp'));
-        return back();
+        try{
+            if($request->hasFile('file')){
+                Excel::import(new HtusImport, $request->file('file')->store('temp'));
+                return back()->with(['message'=>"File imported successfully"]);
+            }else{
+                return back()->with(['error_message'=>"Kindly choose file to import."]);
+            }
+        }catch(Exception $e){
+            Log::error($e);
+            return back()->with(['error_message'=>"Oops! Something went wrong. Try again."]);
+        }
     }
 
     public function allHtus(Request $request)

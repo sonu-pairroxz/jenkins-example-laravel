@@ -36,6 +36,16 @@
         <div class="col-sm-6">
             <div class="card">
                 <div class="card-body">
+                    @if(\Session::get('error_message'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ \Session::get('error_message') }}
+                        </div>
+                    @endif
+                    @if(\Session::get('message'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ \Session::get('message') }}
+                        </div>
+                    @endif
                     <form action="{{ route('file-import') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group mb-4">

@@ -16,6 +16,10 @@ $(function() {
                 searchable: false
             },
             {
+                data: 'ticket_id',
+                name: 'ticket_id'
+            },
+            {
                 data: 'title',
                 name: 'title'
             },

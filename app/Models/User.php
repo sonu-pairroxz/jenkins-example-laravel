@@ -66,8 +66,8 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->role === self::ADMIN_TYPE;
     }
 
-    public function address(){
-        return $this->hasOne(UserAddress::class,'user_id');
+    public function notification(){
+        return $this->belongsTo(Notification::class,'user_id');
     }
     public function userQuery(){
        return $this->hasMany(Query::class, 'user_id');
