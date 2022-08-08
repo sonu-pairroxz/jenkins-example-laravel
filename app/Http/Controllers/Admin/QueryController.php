@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\QueryExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\QueryRequest;
 use App\Models\Notification;
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
 
 class QueryController extends Controller
 {
@@ -29,7 +31,7 @@ class QueryController extends Controller
         try{
             $user = auth()->guard('admin')->user();
             $input = $request->all();
-            $input['ticket_id'] = Str::random(8);
+            $input['ticket_id'] = time();
             DB::beginTransaction();
             $query = $user->userQuery()->create($input);
 
@@ -132,8 +134,26 @@ class QueryController extends Controller
         }
     }
 
-    public function saveNotification(){
+    public function export(){
+        try{
+            $query = Query::latest()->get();
+            return Excel::download(new QueryExport($query), 'query_'.date("Y-m-d").'.xlsx', \Maatwebsite\Excel\Excel::XLSX);
+        }catch(Exception $e){
+            Log::error($e);
+            return back()->with(['error_message'=> "Oops! Something went wrong. Try again."]);
+        }
 
+    }
+
+    public function removeAll(Request $request){
+        try{
+            Notification::query()->delete();
+            Query::query()->delete();
+            return redirect(route('query.index'))->with(["message"=>"All Query removed successfully"]);
+        }catch(Exception $e){
+            Log::error($e);
+            return back()->with(['error_message'=> "Oops! Something went wrong. Try again."]);
+        }
     }
 
 

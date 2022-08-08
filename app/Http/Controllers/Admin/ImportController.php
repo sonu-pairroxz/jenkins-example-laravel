@@ -50,6 +50,30 @@ class ImportController extends Controller
                         ->orWhere('comments', 'like', "%{$request->get('search')}%");
                     }
                 })
+                ->addColumn('chapter_note', function($htuses){
+                    $ch_str = "";
+                    if(!empty($htuses->chapter_note)){
+                        $chapter_notes = explode(',', $htuses->chapter_note);
+                        if(is_array($chapter_notes) && !empty($chapter_notes)){
+                            foreach($chapter_notes as $cn){
+                                $ch_str .= "<a href='".$cn."' target='_blank'><i class='uil-invoice'></i></a> &nbsp;&nbsp;";
+                            }
+                        }
+                    }
+                    return $ch_str;
+                })
+                ->addColumn('amazon_doc', function($htuses){
+                    $ad_str = "";
+                    if(!empty($htuses->amazon_doc)){
+                        $amazon_docs = explode(',', $htuses->amazon_doc);
+                        if(is_array($amazon_docs) && !empty($amazon_docs)){
+                            foreach($amazon_docs as $cn){
+                                $ad_str .= "<a href='".$cn."' target='_blank'><i class='uil-invoice'></i></a> &nbsp;&nbsp;";
+                            }
+                        }
+                    }
+                    return $ad_str;
+                })
                 ->addColumn('image', function($htuses){
                     return "<img src='".$htuses->image_url."' height='50' width='50' alt='".$htuses->image."' />";
                 })
@@ -61,7 +85,7 @@ class ImportController extends Controller
                         <button type="button" data-id="'.$htuses->id.'" class="btn btn-danger btn-sm" id="getDeleteId">Delete</button>
                         <a class="btn btn-warning btn-sm" href="'.route('getDetail', $htuses->id).'">View</a>';
                 })
-                ->rawColumns(['image','action'])
+                ->rawColumns(['image','action','chapter_note','amazon_doc'])
                 ->make(true);
         }
 
@@ -114,6 +138,16 @@ class ImportController extends Controller
         }
 
         return response()->json(['html' => ""]);
+    }
+
+    public function removeAll(Request $request){
+        try{
+            Htus::query()->delete();
+            return redirect(route('admin.dashboard'))->with(["message"=>"All data removed successfully"]);
+        }catch(Exception $e){
+            Log::error($e);
+            return back()->with(['error_message'=> "Oops! Something went wrong. Try again."]);
+        }
     }
 }
 

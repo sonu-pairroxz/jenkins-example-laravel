@@ -30,6 +30,8 @@
                 <h4 class="mb-0">Ask a query</h4>
                 <div class="page-title-right">
                     <a href="{{route('query.create')}}" type="button" class="btn btn-success waves-effect waves-light">+ Add New</a>
+                    <a href="{{route('query.export')}}" type="button" class="btn btn-primary waves-effect waves-light"><i class="fas fa-file-excel"></i> Download Excel</a>
+                    <a href="{{route('query.remove-all')}}" onclick="return confirm('Are you sure want to remove all queries?')" class="btn btn-danger waves-effect waves-light"><i class="fa fa-trash" aria-hidden="true"></i> Remove All</a>
                 </div>
 
             </div>

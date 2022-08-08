@@ -12,6 +12,9 @@
         <div class="col-12">
             <div class="page-title-box d-flex align-items-center justify-content-between">
                 <h4 class="mb-0">Dashboard</h4>
+                <div class="page-title-right">
+                    <a href="{{route('remove-all')}}" onclick="return confirm('Are you sure want to remove all?')" class="btn btn-danger waves-effect waves-light"><i class="fa fa-trash" aria-hidden="true"></i> Remove All</a>
+                </div>
             </div>
         </div>
     </div>

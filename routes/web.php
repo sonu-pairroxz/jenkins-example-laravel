@@ -46,6 +46,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('saveItem/{id}', [ImportController::class, 'update'])->name('saveItem');
         Route::delete('deleteItem/{id}', [ImportController::class, 'delete'])->name('deleteItem');
 
+        Route::get('removeall', [ImportController::class, 'removeAll'])->name('remove-all');
+
 
         Route::prefix('query')->group(function(){
             Route::get('', [QueryController::class, 'index'])->name('query.index');
@@ -56,6 +58,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
             Route::post('store', [QueryController::class, 'store'])->name('query.store');
             Route::get('show/{id}', [QueryController::class, 'create'])->name('query.show');
             Route::delete('delete/{id}', [QueryController::class, 'create'])->name('query.delete');
+            Route::get('export', [QueryController::class, 'export'])->name('query.export');
+            Route::get('remove-all', [QueryController::class, 'removeAll'])->name('query.remove-all');
         });
 	});
 });
