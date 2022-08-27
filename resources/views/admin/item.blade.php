@@ -73,7 +73,7 @@
                         <p><img src="{{asset($data->image_url)}}" height="150" width="150" alt="image" /></p>
                     </div>
                     <div class="col-md-2">
-                        <label for="inputZip" class="form-label">Amazon Doc</label>
+                        <label for="inputZip" class="form-label">Other Doc</label>
                         <p>{{ $data->amazon_doc ?? "n\a"}}</p>
                     </div>
                     <div class="col-md-2">
@@ -83,10 +83,6 @@
                     <div class="col-md-2">
                         <label for="inputZip" class="form-label">Comments</label>
                         <p>{{ $data->comments ?? "n\a"}}</p>
-                    </div>
-                    <div class="col-md-2">
-                        <label for="inputZip" class="form-label">Image</label>
-                        <p><img src="{{asset($data->image)}}" height="150" width="150" alt="image" /></p>
                     </div>
                     <div class="col-md-12">
                         <label for="inputZip" class="form-label">Classification Justification</label>
