@@ -70,11 +70,26 @@
                     </div>
                     <div class="col-md-2">
                         <label for="inputZip" class="form-label">Image URL</label>
-                        <p><img src="{{asset($data->image_url)}}" height="150" width="150" alt="image" /></p>
+                        <p>@if(!empty($data->image_url))
+                            @php $image_urls = explode(',', $data->image_url); @endphp
+                            @if(is_array($image_urls) && !empty($image_urls))
+                                @foreach($image_urls as $image)
+                                <a href="{{$image}}" target='_blank'><img src="{{$image}}" height="150" width="150" alt="image" /></a>
+                                @endforeach
+                            @endif
+                        @endif</p>
+                        <p></p>
                     </div>
                     <div class="col-md-2">
                         <label for="inputZip" class="form-label">Other Doc</label>
-                        <p>{{ $data->amazon_doc ?? "n\a"}}</p>
+                        <p>@if(!empty($data->amazon_doc))
+                            @php $amazon_docs = explode(',', $data->amazon_doc); @endphp
+                            @if(is_array($amazon_docs) && !empty($amazon_docs))
+                                @foreach($amazon_docs as $cn)
+                                    <a href="{{$cn}}" target='_blank'><i class='uil-invoice'></i></a>
+                                @endforeach
+                            @endif
+                        @endif</p>
                     </div>
                     <div class="col-md-2">
                         <label for="inputZip" class="form-label">Chapter Note</label>
