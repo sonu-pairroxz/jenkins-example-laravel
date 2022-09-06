@@ -58,7 +58,7 @@ class HtusImport implements ToModel, WithUpserts, WithBatchInserts, WithChunkRea
     {
         return 1000;
     }
-    private function transformDateTime(string $value, string $format = 'Y-m-d')
+    private function transformDateTime(string $value, string $format = 'd-m-Y')
     {
         try {
                 return Carbon::instance(Date::excelToDateTimeObject($value))->format($format);
