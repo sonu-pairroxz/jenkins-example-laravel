@@ -23,8 +23,8 @@ class HtusImport implements ToModel, WithUpserts, WithBatchInserts, WithChunkRea
         return new Htus([
             'ruling_reference'              => $row['ruling_reference'],
             'issuing_country'               => $row['issuing_country'],
-            'start_date_of_validity'        => Date::excelToDateTimeObject($row['start_date_of_validity'])->format('Y-m-d'),
-            'end_date_of_validity'          => Date::excelToDateTimeObject($row['end_date_of_validity'])->format('Y-m-d'),
+            'start_date_of_validity'        => $this->transformDateTime($row['start_date_of_validity']),
+            'end_date_of_validity'          => $this->transformDateTime($row['end_date_of_validity']),
             'nomenclature_code'             => $row['nomenclature_code'],
             'short_nomenclature_code'       => $row['short_nomenclature_code'],
             'classification_justification'  => $row['classification_justification'],
@@ -57,5 +57,13 @@ class HtusImport implements ToModel, WithUpserts, WithBatchInserts, WithChunkRea
     public function chunkSize(): int
     {
         return 1000;
+    }
+    private function transformDateTime(string $value, string $format = 'Y-m-d')
+    {
+        try {
+                return Carbon::instance(Date::excelToDateTimeObject($value))->format($format);
+            } catch (\ErrorException $e) {
+                return Carbon::createFromFormat($format, $value);
+            }
     }
 }
