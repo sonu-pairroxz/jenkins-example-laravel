@@ -23,8 +23,8 @@ class HtusImport implements ToModel, WithUpserts, WithBatchInserts, WithChunkRea
         return new Htus([
             'ruling_reference'              => $row['ruling_reference'],
             'issuing_country'               => $row['issuing_country'],
-            'start_date_of_validity'        => Date::excelToDateTimeObject($row['start_date_of_validity'])->format('Y-m-d'),
-            'end_date_of_validity'          => Date::excelToDateTimeObject($row['end_date_of_validity'])->format('Y-m-d'),
+            'start_date_of_validity'        => Carbon::createFromFormat('d/m/Y', $row['start_date_of_validity'])->format('Y-m-d'),//Date::excelToDateTimeObject($row['start_date_of_validity'])->format('Y-m-d'),
+            'end_date_of_validity'          => Carbon::createFromFormat('d/m/Y', $row['end_date_of_validity'])->format('Y-m-d'),//Date::excelToDateTimeObject($row['end_date_of_validity'])->format('Y-m-d'),
             'nomenclature_code'             => $row['nomenclature_code'],
             'short_nomenclature_code'       => $row['short_nomenclature_code'],
             'classification_justification'  => $row['classification_justification'],
