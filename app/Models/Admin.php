@@ -17,4 +17,8 @@ class Admin extends Authenticatable
     protected $guard = 'admin';
     protected $guarded = array();
     protected $hiddenAttributes = ['password','remember_token'];
+
+    public function userQuery(){
+        return $this->hasMany(Query::class, 'user_id');
+    }
 }

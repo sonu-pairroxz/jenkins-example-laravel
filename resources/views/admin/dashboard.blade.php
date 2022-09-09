@@ -12,6 +12,9 @@
         <div class="col-12">
             <div class="page-title-box d-flex align-items-center justify-content-between">
                 <h4 class="mb-0">Dashboard</h4>
+                <div class="page-title-right">
+                    <a href="{{route('remove-all')}}" onclick="return confirm('Are you sure want to remove all?')" class="btn btn-danger waves-effect waves-light"><i class="fa fa-trash" aria-hidden="true"></i> Remove All</a>
+                </div>
             </div>
         </div>
     </div>
@@ -21,9 +24,34 @@
         <div class="col-sm-6">
             <div class="card">
                 <div class="card-body">
+                    <form id="search-form" name="search-form">
+                        <div class="form-group mb-4">
+                            <label for="search">Search</label>
+                            <input type="search" name="search" class="form-control search" placeholder="Search here" />
+                        </div>
+                        <div class="form-group mb-4">
+                            <button type="submit" class="btn btn-sm btn-primary" name="submit">Search</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    @if(\Session::get('error_message'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ \Session::get('error_message') }}
+                        </div>
+                    @endif
+                    @if(\Session::get('message'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ \Session::get('message') }}
+                        </div>
+                    @endif
                     <form action="{{ route('file-import') }}" method="POST" enctype="multipart/form-data">
                         @csrf
-                        <div class="form-group mb-4" style="max-width: 500px; margin: 0 auto;">
+                        <div class="form-group mb-4">
                             <div class="custom-file text-left">
                                 <input type="file" name="file" class="custom-file-input" id="customFile">
                             </div>
@@ -33,7 +61,6 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-6"></div>
     </div>
     <div class="row">
         <div class="col-lg-12">
@@ -52,7 +79,9 @@
                                 <th>End Date</th>
                                 <th>Nomenclature Code</th>
                                 <th>Short Nomenclature Code</th>
-                                <th>Classification Justification</th>
+                                <th>Short description</th>
+                                <th>Chapter Note</th>
+                                <th>Amazon Doc</th>
                                 <th>Comments</th>
                                 <th>Action</th>
                             </tr>
@@ -130,7 +159,12 @@
                 serverSide: true,
                 bDestroy: true,
                 scrollX: true,
-                ajax: datatbleurl,
+                ajax: {
+                    url: datatbleurl,
+                    data: function (d) {
+                        d.search = $('input[type="search"]').val()
+                    }
+                },
                 columns: [{
                         data: 'DT_RowIndex',
                         orderable: false,
@@ -165,8 +199,16 @@
                         name: 'short_nomenclature_code'
                     },
                     {
-                        data: 'classification_justification',
-                        name: 'classification_justification'
+                        data: 'short_description',
+                        name: 'short_description'
+                    },
+                    {
+                        data: 'chapter_note',
+                        name: 'chapter_note'
+                    },
+                    {
+                        data: 'amazon_doc',
+                        name: 'amazon_doc'
                     },
                     {
                         data: 'comments',
@@ -179,6 +221,10 @@
                         searchable: false
                     }
                 ]
+            });
+            $('#search-form').on('submit', function(e) {
+                table.draw();
+                e.preventDefault();
             });
         });
     </script>

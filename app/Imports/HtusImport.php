@@ -71,4 +71,14 @@ class HtusImport implements
     {
         return 1000;
     }
+    private function transformDateTime(string $value, string $format = 'd-m-Y')
+    {
+        try {
+            return Carbon::instance(
+                Date::excelToDateTimeObject($value)
+            )->format($format);
+        } catch (\ErrorException $e) {
+            return Carbon::createFromFormat($format, $value);
+        }
+    }
 }

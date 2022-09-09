@@ -33,7 +33,7 @@ class CreateHtusesTable extends Migration
             $table->string('amazon_doc')->nullable();
             $table->string('chapter_note')->nullable();
             $table->text('comments')->nullable();
-            $table->string('image')->nullable();
+            $table->string('short_description')->nullable();
             $table->timestamps();
         });
     }

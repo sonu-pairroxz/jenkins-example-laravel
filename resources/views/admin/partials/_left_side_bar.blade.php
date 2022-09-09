@@ -34,14 +34,14 @@ $user = auth()->guard('admin')->user();
                     </a>
                 </li>
                 <li>
-                    <a href="#!">
-                        <i class="uil-home-alt"></i>
+                    <a href="{{route('query.index')}}">
+                        <i class="uil-comments-alt"></i>
                         <span>Ask Query</span>
                     </a>
                 </li>
                 <li>
                     <a href="#!">
-                        <i class="uil-home-alt"></i>
+                        <i class="uil-invoice"></i>
                         <span>Quiz</span>
                     </a>
                 </li>
