@@ -18,7 +18,8 @@ class ImportController extends Controller
     {
         try{
             if($request->hasFile('file')){
-                Excel::import(new HtusImport, $request->file('file')->store('temp'));
+                ini_set('memory_limit', -1);
+                Excel::queueImport(new HtusImport, $request->file('file'));
                 return back()->with(['message'=>"File imported successfully"]);
             }else{
                 return back()->with(['error_message'=>"Kindly choose file to import."]);

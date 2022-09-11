@@ -6,6 +6,7 @@ use App\Models\Htus;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Maatwebsite\Excel\Concerns\WithBatchInserts;
 use Maatwebsite\Excel\Concerns\WithUpserts;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
@@ -17,7 +18,8 @@ class HtusImport implements
     WithUpserts,
     WithBatchInserts,
     WithChunkReading,
-    WithHeadingRow
+    WithHeadingRow,
+    ShouldQueue
 {
     /**
      * @param array $row
@@ -26,7 +28,6 @@ class HtusImport implements
      */
     public function model(array $row)
     {
-        Log::debug('Error at ' . $row['start_date_of_validity']);
         return new Htus([
             'ruling_reference' => $row['ruling_reference'],
             'issuing_country' => $row['issuing_country'],
@@ -73,20 +74,10 @@ class HtusImport implements
     private function transformDateTime(string $value, string $format = 'd-m-Y')
     {
         try {
-            Log::debug(
-                'Date one ' .
-                    Carbon::instance(
-                        Date::excelToDateTimeObject(intval($value))
-                    )->format($format)
-            );
             return Carbon::instance(
                 Date::excelToDateTimeObject(intval($value))
             )->format($format);
         } catch (\ErrorException $e) {
-            Log::debug(
-                'Date two ' .
-                    Carbon::createFromFormat($format, $value)->format($format)
-            );
             return Carbon::createFromFormat($format, $value)->format($format);
         }
     }
