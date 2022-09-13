@@ -29,11 +29,11 @@ class CreateHtusesTable extends Migration
             $table->text('description_0f_goods')->nullable();
             $table->text('keywords')->nullable();
             $table->string('eccn')->nullable();
-            $table->string('image_url')->nullable();
-            $table->string('amazon_doc')->nullable();
-            $table->string('chapter_note')->nullable();
+            $table->text('image_url')->nullable();
+            $table->text('amazon_doc')->nullable();
+            $table->text('chapter_note')->nullable();
             $table->text('comments')->nullable();
-            $table->string('short_description')->nullable();
+            $table->text('short_description')->nullable();
             $table->timestamps();
         });
     }
