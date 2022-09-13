@@ -64,12 +64,12 @@ class HtusImport implements
 
     public function batchSize(): int
     {
-        return 500;
+        return 1000;
     }
 
     public function chunkSize(): int
     {
-        return 500;
+        return 1000;
     }
     private function transformDateTime(string $value, string $format = 'd-m-Y')
     {

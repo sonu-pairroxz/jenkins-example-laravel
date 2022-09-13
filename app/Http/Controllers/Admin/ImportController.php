@@ -19,7 +19,7 @@ class ImportController extends Controller
         try{
             if($request->hasFile('file')){
                 Excel::queueImport(new HtusImport, $request->file('file'));
-                return back()->with(['message'=>"File imported successfully"]);
+                return back()->with(['message'=>"File has been uploaded successfully. The file is being processed in the background"]);
             }else{
                 return back()->with(['error_message'=>"Kindly choose file to import."]);
             }
