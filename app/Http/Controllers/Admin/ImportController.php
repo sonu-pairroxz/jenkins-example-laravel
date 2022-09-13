@@ -7,6 +7,7 @@ use App\Imports\HtusImport;
 use App\Models\Htus;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
@@ -19,6 +20,7 @@ class ImportController extends Controller
         try{
             if($request->hasFile('file')){
                 Excel::queueImport(new HtusImport, $request->file('file'));
+                Artisan::call('queue:listen');
                 return back()->with(['message'=>"File has been uploaded successfully. The file is being processed in the background"]);
             }else{
                 return back()->with(['error_message'=>"Kindly choose file to import."]);
