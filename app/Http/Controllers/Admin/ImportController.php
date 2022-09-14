@@ -19,7 +19,7 @@ class ImportController extends Controller
     {
         try {
             if ($request->hasFile('file')) {
-                Excel::queueImport(new HtusImport(), $request->file('file'));
+                Excel::import(new HtusImport(), $request->file('file'));
                 //Artisan::call('queue:work --timeout=0');
                 return back()->with([
                     'message' =>
