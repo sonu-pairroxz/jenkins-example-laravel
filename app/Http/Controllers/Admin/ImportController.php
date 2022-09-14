@@ -20,7 +20,7 @@ class ImportController extends Controller
         try {
             if ($request->hasFile('file')) {
                 Excel::queueImport(new HtusImport(), $request->file('file'));
-                Artisan::call('queue:listen --timeout=1200');
+                Artisan::call('queue:work --timeout=0');
                 return back()->with([
                     'message' =>
                         'File has been uploaded successfully. The file is being processed in the background',
