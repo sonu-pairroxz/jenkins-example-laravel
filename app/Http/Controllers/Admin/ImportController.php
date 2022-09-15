@@ -23,7 +23,8 @@ class ImportController extends Controller
             if ($request->hasFile('file')) {
                 $file = Storage::disk('public')->put('files', $request->file('file'));
                 // dd($file);
-                dispatch(new ImportJob($file));
+                Log::info("File Path: ". Storage::path($file));
+                dispatch(new ImportJob(Storage::path($file)));
                 return back()->with([
                     'message' =>
                         'File has been uploaded successfully. The file is being processed in the background',
