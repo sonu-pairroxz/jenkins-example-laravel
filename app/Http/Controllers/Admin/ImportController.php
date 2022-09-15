@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
+use App\Jobs\ImportJob;
+use Illuminate\Support\Facades\Storage;
 
 class ImportController extends Controller
 {
@@ -19,8 +21,9 @@ class ImportController extends Controller
     {
         try {
             if ($request->hasFile('file')) {
-                Excel::import(new HtusImport(), $request->file('file'));
-                //Artisan::call('queue:work --timeout=0');
+                $file = Storage::disk('public')->put('files', $request->file('file'));
+                // dd($file);
+                dispatch(new ImportJob($file));
                 return back()->with([
                     'message' =>
                         'File has been uploaded successfully. The file is being processed in the background',
