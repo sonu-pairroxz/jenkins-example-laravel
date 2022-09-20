@@ -36,7 +36,7 @@ class ImportJob implements ShouldQueue
      */
     public function handle()
     {
-        Excel::queueImport(new HtusImport(), $this->file);
+        Excel::import(new HtusImport(), $this->file);
     }
 
     public function failed(Exception $e){
