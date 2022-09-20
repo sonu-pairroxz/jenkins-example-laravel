@@ -44,7 +44,6 @@ class ImportController extends Controller
 
     public function allHtus(Request $request)
     {
-        echo phpinfo(); die();
         if ($request->ajax()) {
             $htuses = Htus::latest();
 
