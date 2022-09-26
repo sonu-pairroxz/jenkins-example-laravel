@@ -13,6 +13,9 @@ use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 
+
+use Maatwebsite\Excel\Concerns\Importable;
+
 class HtusImport implements
     ToModel,
     WithUpserts,
@@ -21,6 +24,7 @@ class HtusImport implements
     WithHeadingRow,
     ShouldQueue
 {
+    use Importable;
     /**
      * @param array $row
      *
