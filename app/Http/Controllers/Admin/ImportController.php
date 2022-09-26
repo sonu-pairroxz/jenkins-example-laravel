@@ -24,8 +24,8 @@ class ImportController extends Controller
                 $file = Storage::disk('public')->put('files', $request->file('file'));
                 // dd($file);
                 Log::info("File Path: ". Storage::path($file));
-                Excel::import(new HtusImport(), $request->file('file'));
-                //dispatch(new ImportJob(Storage::path($file)));
+                //Excel::import(new HtusImport(), $request->file('file'));
+                dispatch(new ImportJob(Storage::path($file)));
                 return back()->with([
                     'message' =>
                         'File has been uploaded successfully. The file is being processed in the background',
