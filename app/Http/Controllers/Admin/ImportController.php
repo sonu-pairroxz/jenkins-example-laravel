@@ -27,10 +27,10 @@ class ImportController extends Controller
                     $request->file('file')
                 );
                 // dd($file);
-                Log::info('File Path: ' . Storage::path($file));
+                Log::info('File Path: ' . Storage::get($file));
                 //Excel::import(new HtusImport(), $request->file('file'));
                 //(new HtusImport)->queue($request->file('file'));
-                dispatch(new ImportJob(Storage::path($file)));
+                dispatch(new ImportJob(Storage::get($file)));
                 return back()->with([
                     'message' =>
                         'File has been uploaded successfully. The file is being processed in the background',
