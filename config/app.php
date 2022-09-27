@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Application Name
@@ -135,7 +134,6 @@ return [
     */
 
     'providers' => [
-
         /*
          * Laravel Framework Service Providers...
          */
@@ -187,7 +185,7 @@ return [
         Yajra\DataTables\DataTablesServiceProvider::class,
 
         Spatie\Permission\PermissionServiceProvider::class,
-
+        Spatie\SimpleExcel\SimpleExcelReader::class,
     ],
 
     /*
@@ -202,7 +200,6 @@ return [
     */
 
     'aliases' => [
-
         'App' => Illuminate\Support\Facades\App::class,
         'Arr' => Illuminate\Support\Arr::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
@@ -248,5 +245,4 @@ return [
 
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ],
-
 ];
