@@ -70,7 +70,6 @@ class ImportJob implements ShouldQueue
                             $rowProperties['ruling_reference'],
                     ],
                     [
-                        'id' => Str::uuid(),
                         'ruling_reference' =>
                             $rowProperties['ruling_reference'],
                         'issuing_country' => $rowProperties['issuing_country'],
