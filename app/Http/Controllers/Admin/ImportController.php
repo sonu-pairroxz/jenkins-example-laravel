@@ -14,6 +14,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 use App\Jobs\ImportJob;
 use Illuminate\Support\Facades\Storage;
+use Spatie\SimpleExcel\SimpleExcelReader;
 
 class ImportController extends Controller
 {
@@ -21,12 +22,15 @@ class ImportController extends Controller
     {
         try {
             if ($request->hasFile('file')) {
-                $file = Storage::disk('public')->put('files', $request->file('file'));
+                $file = Storage::disk('public')->put(
+                    'files',
+                    $request->file('file')
+                );
                 // dd($file);
-                Log::info("File Path: ". Storage::path($file));
-                Excel::import(new HtusImport(), $request->file('file'));
+                Log::info('File Path: ' . Storage::path($file));
+                //Excel::import(new HtusImport(), $request->file('file'));
                 //(new HtusImport)->queue($request->file('file'));
-                //dispatch(new ImportJob(Storage::path($file)));
+                dispatch(new ImportJob(Storage::path($file)));
                 return back()->with([
                     'message' =>
                         'File has been uploaded successfully. The file is being processed in the background',

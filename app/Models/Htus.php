@@ -29,6 +29,6 @@ class Htus extends Model
         'amazon_doc',
         'chapter_note',
         'comments',
-        'image'
+        'short_description',
     ];
 }
