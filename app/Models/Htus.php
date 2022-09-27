@@ -11,6 +11,7 @@ class Htus extends Model
     use HasFactory, Uuid;
 
     protected $fillable = [
+        'id',
         'ruling_reference',
         'issuing_country',
         'start_date_of_validity',
