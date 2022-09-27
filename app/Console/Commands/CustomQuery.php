@@ -39,7 +39,13 @@ class CustomQuery extends Command
      */
     public function handle()
     {
-        Log::debug('DB Structure');
-        Log::debug(DB::statement('DESCRIBE htuses;'));
+        Log::debug('Deleting DB....');
+        DB::statement('DROP DATABASE vklaravel;');
+        Log::debug('DB Deleted....');
+
+        //
+        Log::debug('Creating new DB....');
+        DB::statement('CREATE DATABASE vklaravel;');
+        Log::debug('New DB Created....');
     }
 }
