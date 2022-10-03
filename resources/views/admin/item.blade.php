@@ -103,7 +103,6 @@
                             @endif
                         @endif
                         </p>
-                        <p>{{ $data->chapter_note ?? "n\a"}}</p>
                     </div>
                     <div class="col-md-2">
                         <label for="inputZip" class="form-label">Comments</label>
