@@ -93,6 +93,16 @@
                     </div>
                     <div class="col-md-2">
                         <label for="inputZip" class="form-label">Chapter Note</label>
+                        <p>
+                            @if(!empty($data->chapter_note))
+                            @php $chapter_notes = explode(',', $data->chapter_note); @endphp
+                            @if(is_array($chapter_notes) && !empty($chapter_notes))
+                                @foreach($chapter_notes as $cn)
+                                    <a href="{{$cn}}" target='_blank'><i class='uil-invoice'></i></a>
+                                @endforeach
+                            @endif
+                        @endif
+                        </p>
                         <p>{{ $data->chapter_note ?? "n\a"}}</p>
                     </div>
                     <div class="col-md-2">
