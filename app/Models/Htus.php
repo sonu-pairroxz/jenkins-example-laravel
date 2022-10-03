@@ -11,6 +11,7 @@ class Htus extends Model
     use HasFactory, Uuid;
 
     protected $fillable = [
+        'id',
         'ruling_reference',
         'issuing_country',
         'start_date_of_validity',
@@ -29,6 +30,6 @@ class Htus extends Model
         'amazon_doc',
         'chapter_note',
         'comments',
-        'image'
+        'short_description',
     ];
 }
