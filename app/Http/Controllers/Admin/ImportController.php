@@ -239,7 +239,7 @@ class ImportController extends Controller
                 })
                 ->rawColumns(['image', 'action', 'chapter_note', 'amazon_doc'])
                 ->setTotalRecords(Htus::count())
-                ->setFilteredRecords($limit)
+                ->setFilteredRecords(10)
                 ->make(true);
         }
 
