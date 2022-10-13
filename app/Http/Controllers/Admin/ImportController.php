@@ -121,7 +121,10 @@ class ImportController extends Controller
     public function allHtus(Request $request)
     {
         if ($request->ajax()) {
-            $htuses = Htus::latest();
+            $start = $request->has('start') ?? 1;
+            $limit = $request->has('limit') ?? 10;
+            $offset = ($start - 1) * $limit;
+            $htuses = Htus::latest()->offset($offset)->limit($limit);
 
             return DataTables::of($htuses)
                 ->addIndexColumn()
