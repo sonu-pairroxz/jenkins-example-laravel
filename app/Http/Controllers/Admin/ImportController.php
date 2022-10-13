@@ -238,6 +238,8 @@ class ImportController extends Controller
                         '">View</a>';
                 })
                 ->rawColumns(['image', 'action', 'chapter_note', 'amazon_doc'])
+                ->setTotalRecords()
+                ->setFilteredRecords()
                 ->make(true);
         }
 
