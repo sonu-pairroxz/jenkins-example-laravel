@@ -121,10 +121,7 @@ class ImportController extends Controller
     public function allHtus(Request $request)
     {
         if ($request->ajax()) {
-            $start = $request->has('start') ?? 1;
-            $limit = $request->has('limit') ?? 10;
-            $offset = ($start - 1) * $limit;
-            $htuses = Htus::latest()->offset($offset)->limit($limit);
+            $htuses = Htus::latest();
 
             return DataTables::of($htuses)
                 ->addIndexColumn()
@@ -238,8 +235,6 @@ class ImportController extends Controller
                         '">View</a>';
                 })
                 ->rawColumns(['image', 'action', 'chapter_note', 'amazon_doc'])
-                ->setTotalRecords(Htus::count())
-                ->setFilteredRecords(10)
                 ->make(true);
         }
 
