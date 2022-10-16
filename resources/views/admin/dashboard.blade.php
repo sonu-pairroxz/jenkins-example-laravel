@@ -164,7 +164,7 @@
                         d.search = $('input[type="search"]').val()
                     }
                 },
-                columns: [,
+                columns: [
                     {
                         data: 'image',
                         name: 'image'

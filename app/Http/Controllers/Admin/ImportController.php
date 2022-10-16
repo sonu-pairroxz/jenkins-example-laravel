@@ -124,7 +124,6 @@ class ImportController extends Controller
             $htuses = Htus::latest();
 
             return DataTables::of($htuses)
-                ->addIndexColumn()
                 ->filter(function ($instance) use ($request) {
                     if ($request->has('search')) {
                         $instance
