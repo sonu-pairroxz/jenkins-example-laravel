@@ -71,7 +71,6 @@
                         <table class="table table-bordered dt-responsive nowrap datatable" style="border-collapse: collapse; border-spacing: 0; width: 100%;" id="latestorder">
                             <thead class="table-light">
                             <tr>
-                                <th>S No</th>
                                 <th>Image</th>
                                 <th>Ruling Reference</th>
                                 <th>Issuing Country</th>
@@ -80,8 +79,8 @@
                                 <th>Nomenclature Code</th>
                                 <th>Short Nomenclature Code</th>
                                 <th>Short description</th>
-                                <th>Chapter Note</th>
-                                <th>Amazon Doc</th>
+                                <th>SN/CN/EN/Leagal doc</th>
+                                <th>Supporting Doc</th>
                                 <th>Comments</th>
                                 <th>Action</th>
                             </tr>
@@ -165,11 +164,7 @@
                         d.search = $('input[type="search"]').val()
                     }
                 },
-                columns: [{
-                        data: 'DT_RowIndex',
-                        orderable: false,
-                        searchable: false
-                    },
+                columns: [,
                     {
                         data: 'image',
                         name: 'image'

@@ -81,7 +81,7 @@
                         <p></p>
                     </div>
                     <div class="col-md-2">
-                        <label for="inputZip" class="form-label">Other Doc</label>
+                        <label for="inputZip" class="form-label">Supporting Doc</label>
                         <p>@if(!empty($data->amazon_doc))
                             @php $amazon_docs = explode(',', $data->amazon_doc); @endphp
                             @if(is_array($amazon_docs) && !empty($amazon_docs))
@@ -92,7 +92,7 @@
                         @endif</p>
                     </div>
                     <div class="col-md-2">
-                        <label for="inputZip" class="form-label">Chapter Note</label>
+                        <label for="inputZip" class="form-label">SN/CN/EN/Leagal doc</label>
                         <p>
                             @if(!empty($data->chapter_note))
                             @php $chapter_notes = explode(',', $data->chapter_note); @endphp

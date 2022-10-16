@@ -214,11 +214,12 @@ class ImportController extends Controller
                     return $ad_str;
                 })
                 ->addColumn('image', function ($htuses) {
-                    return "<img src='" .
-                        $htuses->image_url .
-                        "' height='50' width='50' alt='" .
-                        $htuses->image .
-                        "' />";
+                    $image = "<img src='" .
+                    $htuses->image_url .
+                    "' height='50' width='50' alt='" .
+                    $htuses->image .
+                    "' />";
+                    return "<a href='".$htuses->image_url."' target='_blank'>".$image."</a>";
                 })
                 ->addColumn('short_description', function ($htuses) {
                     return Str::limit($htuses->short_description);
