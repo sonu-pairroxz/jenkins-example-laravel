@@ -218,7 +218,7 @@ class ImportController extends Controller
                     "' height='50' width='50' alt='" .
                     $htuses->image .
                     "' />";
-                    return "<a href='".$htuses->image_url."' target='_blank'>".$image."</a>";
+                    return "<a href='javascript:void(0);' data-id='".$htuses->image_url."' onClick='showImageModal(this);'>".$image."</a>";
                 })
                 ->addColumn('short_description', function ($htuses) {
                     return Str::limit($htuses->short_description);

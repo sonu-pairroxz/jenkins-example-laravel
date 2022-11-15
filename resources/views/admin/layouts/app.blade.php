@@ -16,6 +16,10 @@
     <!-- App Css-->
     <link href="{{asset('assets/css/app.min.css')}}" id="app-style" rel="stylesheet" type="text/css" />
     @stack('styles')
+
+
+    <script src="{{asset('assets/libs/jquery/jquery.min.js')}}"></script>
+    <script src="{{asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 </head>
 <body class="sidebar-enable vertical-collpsed">
 <!-- Begin page -->
@@ -51,10 +55,30 @@
 </div>
 <!-- END layout-wrapper -->
 
-<!-- JAVASCRIPT -->
-<script src="{{asset('assets/libs/jquery/jquery.min.js')}}"></script>
-<script src="{{asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
 
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- JAVASCRIPT -->
+<script>
+    function showImageModal(image){
+        console.log($(image).attr('data-id'));
+        $image = "<img width='850px' src='"+$(image).attr('data-id') +"' />";
+        $('#exampleModalCenter').find('.modal-body').html($image);
+        $('#exampleModalCenter').modal('show');
+    }
+    </script>
 
 <!-- App js -->
 @stack('scripts')

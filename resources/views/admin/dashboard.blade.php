@@ -82,6 +82,7 @@
                                 <th>SN/CN/EN/Leagal doc</th>
                                 <th>Supporting Doc</th>
                                 <th>Comments</th>
+                                <th>Keywords</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -208,6 +209,10 @@
                     {
                         data: 'comments',
                         name: 'comments'
+                    },
+                    {
+                        data: 'keywords',
+                        name: 'keywords'
                     },
                     {
                         data: 'action',
