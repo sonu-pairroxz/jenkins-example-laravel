@@ -5,6 +5,7 @@ namespace App\Imports;
 use App\Models\Htus;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Maatwebsite\Excel\Concerns\WithBatchInserts;
@@ -33,6 +34,7 @@ class HtusImport implements
     public function model(array $row)
     {
         return new Htus([
+            'id' => Str::uuid(),
             'ruling_reference' => $row['ruling_reference'],
             'issuing_country' => $row['issuing_country'],
             'start_date_of_validity' => !empty($row['start_date_of_validity'])
