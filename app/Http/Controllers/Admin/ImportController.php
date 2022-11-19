@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
+use Spatie\SimpleExcel\SimpleExcelReader;
 use Yajra\DataTables\Facades\DataTables;
 use App\Jobs\ImportJob;
 use Illuminate\Support\Facades\Storage;
@@ -30,7 +31,7 @@ class ImportController extends Controller
                 //Excel::import(new HtusImport(), $request->file('file'));
                 //(new HtusImport)->queue($request->file('file'));
                 //dispatch(new ImportJob(Storage::path($file)));
-                \Spatie\SimpleExcel\SimpleExcelReader::create(
+                SimpleExcelReader::create(
                     Storage::path($file),
                     'xlsx'
                 )
