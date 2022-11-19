@@ -30,57 +30,57 @@ class ImportController extends Controller
                 Log::info('File Path: ' . Storage::path($file));
                 //Excel::import(new HtusImport(), $request->file('file'));
                 //(new HtusImport)->queue($request->file('file'));
-                //dispatch(new ImportJob(Storage::path($file)));
-                SimpleExcelReader::create(
-                    Storage::path($file),
-                    'xlsx'
-                )
-                    ->getRows()
-                    ->each(function (array $rowProperties) {
-                        Htus::updateOrCreate(
-                            [
-                                'ruling_reference' =>
-                                    $rowProperties['ruling_reference'],
-                            ],
-                            [
-                                'id' => Str::uuid(),
-                                'ruling_reference' =>
-                                    $rowProperties['ruling_reference'],
-                                'issuing_country' =>
-                                    $rowProperties['issuing_country'],
-                                'start_date_of_validity' =>
-                                    $rowProperties['start_date_of_validity'],
-                                'end_date_of_validity' =>
-                                    $rowProperties['end_date_of_validity'],
-                                'nomenclature_code' =>
-                                    $rowProperties['nomenclature_code'],
-                                'classification_justification' =>
-                                    $rowProperties[
-                                        'classification_justification'
-                                    ],
-                                'short_nomenclature_code' =>
-                                    $rowProperties['short_nomenclature_code'],
-                                'language' => $rowProperties['language'],
-                                'place_of_issue' =>
-                                    $rowProperties['place_of_issue'],
-                                'date_of_issue' =>
-                                    $rowProperties['date_of_issue'],
-                                'name_address' =>
-                                    $rowProperties['name_address'],
-                                'description_0f_goods' =>
-                                    $rowProperties['description_0f_goods'],
-                                'keywords' => $rowProperties['keywords'],
-                                'eccn' => $rowProperties['eccn'],
-                                'image_url' => $rowProperties['image_url'],
-                                'amazon_doc' => $rowProperties['amazon_doc'],
-                                'chapter_note' =>
-                                    $rowProperties['chapter_note'],
-                                'comments' => $rowProperties['comments'],
-                                'short_description' =>
-                                    $rowProperties['short_description'],
-                            ]
-                        );
-                    });
+                dispatch(new ImportJob(Storage::path($file)));
+                // SimpleExcelReader::create(
+                //     Storage::path($file),
+                //     'xlsx'
+                // )
+                //     ->getRows()
+                //     ->each(function (array $rowProperties) {
+                //         Htus::updateOrCreate(
+                //             [
+                //                 'ruling_reference' =>
+                //                     $rowProperties['ruling_reference'],
+                //             ],
+                //             [
+                //                 'id' => Str::uuid(),
+                //                 'ruling_reference' =>
+                //                     $rowProperties['ruling_reference'],
+                //                 'issuing_country' =>
+                //                     $rowProperties['issuing_country'],
+                //                 'start_date_of_validity' =>
+                //                     $rowProperties['start_date_of_validity'],
+                //                 'end_date_of_validity' =>
+                //                     $rowProperties['end_date_of_validity'],
+                //                 'nomenclature_code' =>
+                //                     $rowProperties['nomenclature_code'],
+                //                 'classification_justification' =>
+                //                     $rowProperties[
+                //                         'classification_justification'
+                //                     ],
+                //                 'short_nomenclature_code' =>
+                //                     $rowProperties['short_nomenclature_code'],
+                //                 'language' => $rowProperties['language'],
+                //                 'place_of_issue' =>
+                //                     $rowProperties['place_of_issue'],
+                //                 'date_of_issue' =>
+                //                     $rowProperties['date_of_issue'],
+                //                 'name_address' =>
+                //                     $rowProperties['name_address'],
+                //                 'description_0f_goods' =>
+                //                     $rowProperties['description_0f_goods'],
+                //                 'keywords' => $rowProperties['keywords'],
+                //                 'eccn' => $rowProperties['eccn'],
+                //                 'image_url' => $rowProperties['image_url'],
+                //                 'amazon_doc' => $rowProperties['amazon_doc'],
+                //                 'chapter_note' =>
+                //                     $rowProperties['chapter_note'],
+                //                 'comments' => $rowProperties['comments'],
+                //                 'short_description' =>
+                //                     $rowProperties['short_description'],
+                //             ]
+                //         );
+                //     });
                 return back()->with([
                     'message' =>
                         'File has been uploaded successfully. The file is being processed in the background',
