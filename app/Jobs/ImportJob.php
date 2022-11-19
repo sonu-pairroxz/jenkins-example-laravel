@@ -40,28 +40,7 @@ class ImportJob implements ShouldQueue
     public function handle()
     {
         //Excel::import(new HtusImport(), $this->file);
-        \Spatie\SimpleExcel\SimpleExcelReader::create($this->file, 'xlsx')
-            ->useHeaders([
-                'ruling_reference',
-                'issuing_country',
-                'start_date_of_validity',
-                'end_date_of_validity',
-                'nomenclature_code',
-                'classification_justification',
-                'short_nomenclature_code',
-                'language',
-                'place_of_issue',
-                'date_of_issue',
-                'name_address',
-                'description_0f_goods',
-                'keywords',
-                'eccn',
-                'image_url',
-                'amazon_doc',
-                'chapter_note',
-                'comments',
-                'short_description',
-            ])
+        SimpleExcelReader::create($this->file, 'xlsx')
             ->getRows()
             ->each(function (array $rowProperties) {
                 Htus::updateOrCreate(
