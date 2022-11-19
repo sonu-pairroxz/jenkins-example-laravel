@@ -28,9 +28,9 @@ class ImportController extends Controller
                 );
                 // dd($file);
                 Log::info('File Path: ' . Storage::path($file));
-                Excel::import(new HtusImport(), $request->file('file'));
+                //Excel::import(new HtusImport(), $request->file('file'));
                 //(new HtusImport)->queue($request->file('file'));
-                //dispatch(new ImportJob(Storage::path($file)));
+                dispatch(new ImportJob(Storage::path($file)));
                 // SimpleExcelReader::create(
                 //     Storage::path($file),
                 //     'xlsx'
