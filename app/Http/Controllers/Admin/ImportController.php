@@ -182,9 +182,7 @@ class ImportController extends Controller
                         if (is_array($amazon_docs) && !empty($amazon_docs)) {
                             foreach ($amazon_docs as $cn) {
                                 $ad_str .=
-                                    "<a href='" .
-                                    $cn .
-                                    "' target='_blank'><i class='uil-invoice'></i></a> &nbsp;&nbsp;";
+                                    "<a href='javascript:void(0);' data-id='".$cn."' onClick='showPDF(this);'><i class='uil-invoice'></i></a> &nbsp;&nbsp;";
                             }
                         }
                     }
