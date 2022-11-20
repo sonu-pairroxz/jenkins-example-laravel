@@ -81,7 +81,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body modal-dialog-scrollable">
+        <div class="modal-body" style="height: calc(100vh - 5em);overflow-x: auto;">
 
         </div>
       </div>
