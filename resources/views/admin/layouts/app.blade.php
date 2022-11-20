@@ -73,7 +73,7 @@
 
 {{-- View PDF    --}}
 <div class="modal fade" id="modalpdfviewer" tabindex="-1" role="dialog" aria-labelledby="modalpdfviewer" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="modalpdfviewerTitle"></h5>
@@ -97,7 +97,7 @@
     }
     function showPDF(pdf){
         console.log($(pdf).attr('data-id'));
-        $pdf = "<embed src='"+$(pdf).attr('data-id')+"' type='text/pdf' >";
+        $pdf = "<iframe src='"+$(pdf).attr('data-id')+"' width='850px'> </iframe>";
         $('#modalpdfviewer').find('.modal-body').html($pdf);
         $('#modalpdfviewer').modal('show');
     }
