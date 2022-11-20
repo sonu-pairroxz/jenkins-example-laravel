@@ -97,7 +97,7 @@
     }
     function showPDF(pdf){
         console.log($(pdf).attr('data-id'));
-        $pdf = "<iframe src='"+$(pdf).attr('data-id')+"' width='1000px' height=750px> </iframe>";
+        $pdf = "<iframe src='"+$(pdf).attr('data-id')+"' width='1100px' height=650px> </iframe>";
         $('#modalpdfviewer').find('.modal-body').html($pdf);
         $('#modalpdfviewer').modal('show');
     }
