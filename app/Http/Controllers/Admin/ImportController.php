@@ -169,7 +169,7 @@ class ImportController extends Controller
                         ) {
                             foreach ($chapter_notes as $cn) {
                                 $ch_str .=
-                                    "<a href='javascript:void(0);' data-id='".$cn."' onClick='window.open('".$cn."', 'popup');'><i class='uil-invoice'></i></a> &nbsp;&nbsp;";
+                                    "<a href='javascript:void(0);' data-id='".$cn."' onClick='window.open($cn, 'popup');'><i class='uil-invoice'></i></a> &nbsp;&nbsp;";
                             }
                         }
                     }
