@@ -103,7 +103,7 @@
     }
     </script>
     <script>
-        iframe.onload = function(){
+        $('#iframe').onload = function(){
         var that = $(this)[0];
         try{
                 that.contentDocument;
