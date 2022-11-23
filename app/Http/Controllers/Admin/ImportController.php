@@ -169,7 +169,7 @@ class ImportController extends Controller
                         ) {
                             foreach ($chapter_notes as $cn) {
                                 $ch_str .=
-                                "<a href='javascript:void(0);' target='popup' data-id='".$cn."' onClick='window.open(\'".$cn."\', \'popup\',\'height:580,width:1100\'); return false;'><i class='uil-invoice'></i></a> &nbsp;&nbsp;";
+                                "<a href='".$cn."' target='popup' data-id='".$cn."' onClick='window.open('".$cn."', 'popup','height:580,width:1100'); return false;'><i class='uil-invoice'></i></a> &nbsp;&nbsp;";
                             }
                         }
                     }
@@ -182,7 +182,7 @@ class ImportController extends Controller
                         if (is_array($amazon_docs) && !empty($amazon_docs)) {
                             foreach ($amazon_docs as $cn) {
                                 $ad_str .=
-                                "<a href='javascript:void(0);' target='popup' data-id='".$cn."' onClick='window.open(\'".$cn."\', \'popup\',\'height:580,width:1100\'); return false;'><i class='uil-invoice'></i></a> &nbsp;&nbsp;";
+                                "<a href='".$cn."' target='popup' data-id='".$cn."' onClick='window.open('".$cn."', 'popup','height:580,width:1100'); return false;'><i class='uil-invoice'></i></a> &nbsp;&nbsp;";
                             }
                         }
                     }
