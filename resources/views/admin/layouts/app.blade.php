@@ -98,8 +98,9 @@
     function showPDF(pdf){
         console.log($(pdf).attr('data-id'));
         $pdf = "<iframe frame-ancestors='self' src='"+$(pdf).attr('data-id')+"' width='1100px' height=580px> </iframe>";
-        $('#modalpdfviewer').find('.modal-body').html($pdf);
-        $('#modalpdfviewer').modal('show');
+        window.open($(pdf).attr('data-id'), 'popup');
+        //$('#modalpdfviewer').find('.modal-body').html($pdf);
+        //$('#modalpdfviewer').modal('show');
     }
     </script>
     <script>
