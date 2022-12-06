@@ -32,6 +32,7 @@ class QueryController extends Controller
             $user = auth()->guard('admin')->user();
             $input = $request->all();
             $input['ticket_id'] = time();
+            $input['status'] = 'Pending';
             DB::beginTransaction();
             $query = $user->userQuery()->create($input);
 
@@ -87,7 +88,7 @@ class QueryController extends Controller
     public function update(Request $request, $id){
         try{
             $user = auth()->guard('admin')->user();
-            $input = $request->only(['manager_id','marketplace','resolver_comment']);
+            $input = $request->only(['manager_id','marketplace','resolver_comment','status']);
             DB::beginTransaction();
             $query = $user->userQuery()->find($id);
             if(!$query){
@@ -126,8 +127,38 @@ class QueryController extends Controller
                     $route = route('query.edit', $query->id);
                     return "<a href='".$route."'>".$query->ticket_id."</a>";
                 })
+                ->addColumn('work_stream', function($query){
+                    //work_stream
+                    switch($query->work_stream){
+                        case 'DI-Daily':
+                            $work_stream = '<p style="color:red">'.$query->work_stream.'</p>';
+                            break;
+                        case 'DI-Weekly':
+                            $work_stream = '<p style="color:orange">'.$query->work_stream.'</p>';
+                            break;
+                        case 'Non DI':
+                            $work_stream = '<p>'.$query->work_stream.'</p>';
+                            break;
+                        case 'Urgent':
+                            $work_stream = '<p style="color:red">'.$query->work_stream.'</p>';
+                            break;
+                        case 'High':
+                            $work_stream = '<p style="color:red">'.$query->work_stream.'</p>';
+                            break;
+                        case 'Medium':
+                            $work_stream = '<p style="color:yellow">'.$query->work_stream.'</p>';
+                            break;
+                        case 'Low':
+                            $work_stream = '<p style="color:green">'.$query->work_stream.'</p>';
+                            break;
+                        default:
+                            $work_stream = $query->work_stream;
+                            break;
+                    }
+                    return $work_stream;
+                })
                 ->addColumn('actions','<a class="btn btn-outline-primary btn-sm" href="{{route(\'query.edit\',$id)}}" title="Edit"><i class="fas fa-pencil-alt"></i></a>')
-                ->rawColumns(['actions','ticket_id'])
+                ->rawColumns(['actions','ticket_id','work_stream'])
                 ->make(true);
         }catch (Exception $e){
             Log::error($e);

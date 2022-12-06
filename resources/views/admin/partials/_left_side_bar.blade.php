@@ -29,20 +29,66 @@ $user = auth()->guard('admin')->user();
 
                 <li>
                     <a href="{{route('admin.dashboard')}}">
-                        <i class="uil-home-alt"></i>
-                        <span>Master Data</span>
+                        <img src="{{asset('assets/images/icons/rulling-master.png')}}" height=30 width="30" />
+                        <span>Rulling Master</span>
                     </a>
                 </li>
+
+                <li>
+                    <a href="#!">
+                        <img src="{{asset('assets/images/icons/find-hs.png')}}" height=30 width="30" />
+                        <span>Find HS</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#!">
+                        <img src="{{asset('assets/images/icons/doq-lib.png')}}" height=30 width="30" />
+                        <span>Doc lib</span>
+                    </a>
+                </li>
+
                 <li>
                     <a href="{{route('query.index')}}">
-                        <i class="uil-comments-alt"></i>
+                        <img src="{{asset('assets/images/icons/rulling-master.png')}}" height=30 width="30" />
                         <span>Ask Query</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#!">
+                        <img src="{{asset('assets/images/icons/world-trade.png')}}" height=30 width="30" />
+                        <span>World Trade News</span>
                     </a>
                 </li>
                 <li>
                     <a href="#!">
-                        <i class="uil-invoice"></i>
-                        <span>Quiz</span>
+                        <img src="{{asset('assets/images/icons/abce.png')}}" height=30 width="30" />
+                        <span>ABCE</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#!">
+                        <img src="{{asset('assets/images/icons/kymp.png')}}" height=30 width="30" />
+                        <span>KYMP</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#!">
+                        <img src="{{asset('assets/images/icons/quiz.png')}}" height=30 width="30" />
+                        <span>Quiz Learning</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#!">
+                        <img src="{{asset('assets/images/icons/dumping.png')}}" height=30 width="30" />
+                        <span>Dumping Data</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#!">
+                        <img src="{{asset('assets/images/icons/knowledge.png')}}" height=30 width="30" />
+                        <span>Knowledge Bite</span>
                     </a>
                 </li>
             </ul>

@@ -13,7 +13,31 @@
                 <marquee behavior="scroll" direction="up" scrollamount=3 onmouseover="this.stop();" onmouseout="this.start();">
                     @forelse ($notifications as $notification)
                         <p class="card-title-desc">
-                            <a target="_blank" href="{{route('query.edit', $notification->query_id)}}"> >> {{$notification->notification_text}}</a>
+                            @switch($notification->userQuery->work_stream)
+                                @case('DI-Daily')
+                                    <a target="_blank" style="color:red" href="{{route('query.edit', $notification->query_id)}}"> >> {{$notification->notification_text}}</a>
+                                @break
+                                @case('DI-Weekly')
+                                    <a target="_blank" style="color:orange" href="{{route('query.edit', $notification->query_id)}}"> >> {{$notification->notification_text}}</a>
+                                @break
+                                @case('Non DI')
+                                    <a target="_blank" href="{{route('query.edit', $notification->query_id)}}"> >> {{$notification->notification_text}}</a>
+                                @break
+                                @case('Urgent')
+                                    <a target="_blank" style="color:red" href="{{route('query.edit', $notification->query_id)}}"> >> {{$notification->notification_text}}</a>
+                                @break
+                                @case('High')
+                                    <a target="_blank" style="color:red" href="{{route('query.edit', $notification->query_id)}}"> >> {{$notification->notification_text}}</a>
+                                @break
+                                @case('Medium')
+                                    <a target="_blank" style="color:yellow" href="{{route('query.edit', $notification->query_id)}}"> >> {{$notification->notification_text}}</a>
+                                @break
+                                @case('Low')
+                                    <a target="_blank" style="color:green" href="{{route('query.edit', $notification->query_id)}}"> >> {{$notification->notification_text}}</a>
+                                @break
+                                @default
+                                <a target="_blank" href="{{route('query.edit', $notification->query_id)}}"> >> {{$notification->notification_text}}</a>
+                            @endswitch
                         </p>
                     @empty
                     <p>No notification found.</p>

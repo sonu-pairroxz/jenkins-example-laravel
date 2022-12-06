@@ -44,7 +44,7 @@
                             </div>
                             <div class="mb-3">
                                 {{Form::label('tariff_node', 'Tariff Node', array('class' => '', 'id'=>'tariff_node'))}}
-                                {{Form::text('tariff_node', $query->tarrif_node, ['class'=>'form-control', 'readonly'=>'readonly'])}}
+                                {{Form::text('tariff_node', $query->tariff_node, ['class'=>'form-control', 'readonly'=>'readonly'])}}
                             </div>
                             <div class="mb-3">
                                 {{Form::label('ruling_referred', 'Ruling Referred', array('class' => '', 'id'=>'ruling_referred'))}}
@@ -58,6 +58,10 @@
                                 {{Form::label('requester_comment', null, array('class' => '', 'id'=>'requester_comment'))}}
                                 {{Form::textarea('requester_comment', $query->requester_comment ?? "", ['class'=>'form-control', 'readonly'=>'readonly','rows' =>'6'])}}
 
+                            </div>
+                            <div class="mb-3">
+                                {{Form::label('image_url', 'Image URL', array('class' => '', 'id'=>'image_url'))}}
+                                <img src="{{$query->image_url}}" height=100 width=100>
                             </div>
 
                         </div>
@@ -116,6 +120,19 @@
                                 {{Form::textarea('resolver_comment', old('resolver_comment', $query->resolver_comment ?? ""), ['class'=>'form-control', 'placeholder'=>'Add your comment','rows' =>'6'])}}
                                 @error('resolver_comment')
                                     {{Form::label('resolver_comment', $message, array('class' => 'error', 'id'=>'resolver_comment-error'))}}
+                                @enderror
+                            </div>
+
+                            <div class="mb-3">
+                                {{Form::label('status', 'Status', array('class' => '', ))}}
+                                <select class="form-control form-select" name="status" required="required" data-parsley-required-message="Status is required">
+                                    <option value="">Choose Status</option>
+                                    <option value="Pending" {{$query->status == 'Pending' ? 'selected' : ''}}>Pending</option>
+                                    <option value="Resolved" {{$query->status == 'Resolved' ? 'selected' : ''}}>Resolved</option>
+                                    <option value="Reopen" {{$query->status == 'Reopen' ? 'selected' : ''}}>Reopen</option>
+                                </select>
+                                @error('marketplace')
+                                    {{Form::label('marketplace', $message, array('class' => 'error', 'id'=>'marketplace-error'))}}
                                 @enderror
                             </div>
                         </div>

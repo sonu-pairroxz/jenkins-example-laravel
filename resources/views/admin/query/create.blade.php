@@ -44,8 +44,13 @@
                             <div class="mb-3">
                                 <select class="form-control form-select" name="work_stream" id="marketplace" required="required" data-parsley-required-message="You must select at least one option">
                                     <option value="">Choose work stream</option>
-                                    <option value="DI" {{old('DI') ? 'selected' : ''}}>DI</option>
+                                    <option value="DI-Daily" {{old('DI-Daily') ? 'selected' : ''}}>DI Daily</option>
+                                    <option value="DI-Weekly" {{old('DI-Weekly') ? 'selected' : ''}}>DI Weekly</option>
                                     <option value="Non DI" {{old('Non DI') ? 'selected' : ''}}>Non DI</option>
+                                    <option value="Urgent" {{old('Urgent') ? 'selected' : ''}}>Urgent</option>
+                                    <option value="High" {{old('High') ? 'selected' : ''}}>High</option>
+                                    <option value="Medium" {{old('Medium') ? 'selected' : ''}}>Medium</option>
+                                    <option value="Low" {{old('Low') ? 'selected' : ''}}>Low</option>
                                 </select>
                                 @error('work_stream')
                                     {{Form::label('work_stream', $message, array('class' => 'error', 'id'=>'work_stream-error'))}}
@@ -90,6 +95,12 @@
                                 {{Form::textarea('requester_comment', old('requester_comment', ''), ['class'=>'form-control', 'placeholder'=>'Enter Comment','rows' =>'6','required'=>'required'])}}
                                 @error('requester_comment')
                                     {{Form::label('requester_comment', $message, array('class' => 'error', 'id'=>'requester_comment-error'))}}
+                                @enderror
+                            </div>
+                            <div class="mb-3">
+                                {{Form::text('image_url', old('image_url', ''), ['class'=>'form-control', 'placeholder'=>'Image URL','required'=>'required','data-parsley-required-message'=>"Image URL is required"])}}
+                                @error('image_url')
+                                    {{Form::label('image_url', $message, array('class' => 'error', 'id'=>'image_url-error'))}}
                                 @enderror
                             </div>
                         </div>

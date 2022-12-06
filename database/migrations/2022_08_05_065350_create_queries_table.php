@@ -31,6 +31,8 @@ class CreateQueriesTable extends Migration
             $table->string('itk');
             $table->text('requester_comment')->nullable();
             $table->text('resolver_comment')->nullable();
+            $table->text('image_url')->nullable();
+            $table->text('status')->nullable();
             $table->timestamps();
         });
     }
