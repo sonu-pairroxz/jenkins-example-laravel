@@ -123,9 +123,15 @@ class QueryController extends Controller
             //dd($user);
             return DataTables::of($query)
                 ->addIndexColumn()
-                ->addColumn('ticket_id', function($query){
+                ->addColumn('ticket_id', function ($query) {
                     $route = route('query.edit', $query->id);
-                    return "<a href='".$route."'>".$query->ticket_id."</a>";
+                    return "<a href='" . $route . "'>" . $query->ticket_id . "</a>";
+                })
+                ->addColumn('asin', function ($query) {
+                    $img = "https://images.amazon.com/images/P/".$query->asin."._SCMZZZZZZZ_.jpg";
+                    $image = '<img src="'.$img.'" height="50" width="50">';
+
+                    return "<a href='javascript:void(0);' data-id='". $img."' onClick='showImageModal(this);'>".$image."</a>";
                 })
                 ->addColumn('work_stream', function($query){
                     //work_stream
@@ -158,7 +164,7 @@ class QueryController extends Controller
                     return $work_stream;
                 })
                 ->addColumn('actions','<a class="btn btn-outline-primary btn-sm" href="{{route(\'query.edit\',$id)}}" title="Edit"><i class="fas fa-pencil-alt"></i></a>')
-                ->rawColumns(['actions','ticket_id','work_stream'])
+                ->rawColumns(['actions','ticket_id','work_stream','asin'])
                 ->make(true);
         }catch (Exception $e){
             Log::error($e);

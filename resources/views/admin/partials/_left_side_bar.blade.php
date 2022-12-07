@@ -50,7 +50,7 @@ $user = auth()->guard('admin')->user();
 
                 <li>
                     <a href="{{route('query.index')}}">
-                        <img src="{{asset('assets/images/icons/rulling-master.png')}}" height=30 width="30" />
+                        <img src="{{asset('assets/images/icons/ask-query.jpg')}}" height=30 width="30" />
                         <span>Ask Query</span>
                     </a>
                 </li>
