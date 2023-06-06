@@ -15,7 +15,7 @@ class CreateJitLearningsTable extends Migration
     {
         Schema::create('jit_learnings', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignUuid('user_id')->nullable()->constrained('users');
             $table->string('ticket_id');
             $table->string('image')->nullable();
             $table->string('asin')->nullable();
