@@ -2,6 +2,15 @@
 @section('title', 'Laravel | Dashboard')
 @push('styles')
     <style>
+        .page {
+            display: grid;
+        }
+        .grid-header {
+            background-color: #d7d7d7;
+            text-align: left;
+            padding: 13px;
+            font-size: medium;
+        }
     </style>
 @endpush
 @section("content")
@@ -108,16 +117,16 @@
                         <label for="inputZip" class="form-label">Comments</label>
                         <p>{{ $data->comments ?? "n\a"}}</p>
                     </div>
-                    <div class="col-md-12">
-                        <label for="inputZip" class="form-label">Classification Justification</label>
+                    <div class="col-md-12 page">
+                        <label for="inputZip" class="form-label grid-header">Classification Justification</label>
                         <p>{{ $data->classification_justification ?? "n\a"}}</p>
                     </div>
-                    <div class="col-md-12">
-                        <label for="inputZip" class="form-label">Keywords</label>
+                    <div class="col-md-12 page">
+                        <label for="inputZip" class="form-label grid-header">Keywords</label>
                         <p>{{ $data->keywords ?? "n\a"}}</p>
                     </div>
-                    <div class="col-md-12">
-                        <label for="inputZip" class="form-label">Description of goods</label>
+                    <div class="col-md-12 page">
+                        <label for="inputZip" class="form-label grid-header">Description of goods</label>
                         <p>{{ $data->description_0f_goods ?? "n\a"}}</p>
                     </div>
                 </div>

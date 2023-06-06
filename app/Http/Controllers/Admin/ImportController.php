@@ -30,7 +30,7 @@ class ImportController extends Controller
                 Log::info('File Path: ' . Storage::path($file));
                 //Excel::import(new HtusImport(), $request->file('file'));
                 //(new HtusImport)->queue($request->file('file'));
-                dispatch(new ImportJob(Storage::path($file)));
+                dispatch_sync(new ImportJob(Storage::path($file)));
                 // SimpleExcelReader::create(
                 //     Storage::path($file),
                 //     'xlsx'
@@ -199,6 +199,9 @@ class ImportController extends Controller
                 ->addColumn('short_description', function ($htuses) {
                     return Str::limit($htuses->short_description);
                 })
+                ->addColumn('keywords', function ($htuses) {
+                    return wordwrap($htuses->keywords, 50, '<br \>', true);
+                })
                 ->addColumn('action', function ($htuses) {
                     return '<button type="button" class="btn btn-success btn-sm" id="getEditProductData" data-id="' .
                         $htuses->id .
@@ -210,7 +213,7 @@ class ImportController extends Controller
                         route('getDetail', $htuses->id) .
                         '">View</a>';
                 })
-                ->rawColumns(['image', 'action', 'chapter_note', 'amazon_doc'])
+                ->rawColumns(['image', 'action', 'chapter_note', 'amazon_doc','keywords'])
                 ->make(true);
         }
 

@@ -21,4 +21,12 @@ class Admin extends Authenticatable
     public function userQuery(){
         return $this->hasMany(Query::class, 'user_id');
     }
+    public function jitLearning(){
+        return $this->hasMany(JitLearning::class, 'user_id');
+    }
+
+    //news
+    public function news(){
+        return $this->hasMany(News::class, 'user_id');
+    }
 }

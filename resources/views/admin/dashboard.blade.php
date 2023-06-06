@@ -73,10 +73,7 @@
                             <tr>
                                 <th>Image</th>
                                 <th>Ruling Reference</th>
-                                <th>Issuing Country</th>
-                                <th>Start Date</th>
                                 <th>End Date</th>
-                                <th>Nomenclature Code</th>
                                 <th>Short Nomenclature Code</th>
                                 <th>Short description</th>
                                 <th>SN/CN/EN/Leagal doc</th>
@@ -175,20 +172,8 @@
                         name: 'ruling_reference'
                     },
                     {
-                        data: 'issuing_country',
-                        name: 'issuing_country'
-                    },
-                    {
-                        data: 'start_date_of_validity',
-                        name: 'start_date_of_validity'
-                    },
-                    {
                         data: 'end_date_of_validity',
                         name: 'end_date_of_validity'
-                    },
-                    {
-                        data: 'nomenclature_code',
-                        name: 'nomenclature_code'
                     },
                     {
                         data: 'short_nomenclature_code',

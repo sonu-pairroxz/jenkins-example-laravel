@@ -74,9 +74,9 @@ $user = auth()->guard('admin')->user();
                     </a>
                 </li>
                 <li>
-                    <a href="#!">
+                    <a href="{{route('jit-learning.index')}}">
                         <img src="{{asset('assets/images/icons/quiz.png')}}" height=30 width="30" />
-                        <span>Quiz Learning</span>
+                        <span>Quiz/JIT Learning</span>
                     </a>
                 </li>
                 <li>
